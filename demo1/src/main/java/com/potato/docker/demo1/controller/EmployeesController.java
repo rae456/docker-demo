@@ -24,6 +24,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>
@@ -63,7 +64,7 @@ public class EmployeesController {
     }
 
     @PostMapping("save")
-    public String saveEmployee(@RequestBody @Validated(CustomerValidGroup.Crud.Insert.class) Employees employees) {
+    public String saveEmployee(@RequestBody @Validated(CustomerValidGroup.Crud.Insert.class) Employees employee) {
         for (int i = 0; i < 100; i++) {
             log.error("error信息!!");
             log.warn("warn信息!!");
@@ -71,6 +72,7 @@ public class EmployeesController {
             log.debug("debug信息!!");
             log.trace("trace信息!!");
         }
+        boolean save = employeesService.save(employee);
         System.out.println(log.getClass().getName());
         System.out.println(log.getName());
 //        logger.info("入参{}",  employees);
@@ -78,6 +80,9 @@ public class EmployeesController {
 //        if (save) {
 //            return "success";
 //        }
+        if (save) {
+            return "success";
+        }
         return "fail";
     }
 }
