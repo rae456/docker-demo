@@ -39,13 +39,13 @@ public class SysUserController {
             Map<String, String> errorMap = bindingResult.getFieldErrors().stream()
                     .collect(Collectors.toMap(fieldError -> Objects.nonNull(fieldError.getField()) ? fieldError.getField() : "",
                             fieldError -> fieldError.getDefaultMessage(), (oldValue, newValue) -> oldValue));
-            return ResponseVo.fail("参数错误!").setData(errorMap);
+            return ResponseVo.fail("参数错误!!").setData(errorMap);
         }
         boolean save = sysUserService.encodeAndSave(sysUser);
         if (!save) {
-            return ResponseVo.fail("创建账户失败!").setData(bindingResult);
+            return ResponseVo.fail("创建账户失败!!").setData(bindingResult);
         }
-        return ResponseVo.ok().setMessage("创建账户成功!");
+        return ResponseVo.ok().setMessage("创建账户成功!!");
     }
 
     @GetMapping("list")
