@@ -63,7 +63,7 @@ public class EmployeesController {
     }
 
     @PostMapping("save")
-    public String saveEmployee(@RequestBody @Validated(CustomerValidGroup.Crud.Insert.class) Employees employees) {
+    public String saveEmployee(@RequestBody @Validated(CustomerValidGroup.Crud.Insert.class) Employees employee) {
         for (int i = 0; i < 100; i++) {
             log.error("error信息!!");
             log.warn("warn信息!!");
@@ -71,6 +71,7 @@ public class EmployeesController {
             log.debug("debug信息!!");
             log.trace("trace信息!!");
         }
+        employeesService.save(employee);
         System.out.println(log.getClass().getName());
         System.out.println(log.getName());
 //        logger.info("入参{}",  employees);
