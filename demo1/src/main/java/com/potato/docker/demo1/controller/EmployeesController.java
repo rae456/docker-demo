@@ -81,8 +81,8 @@ public class EmployeesController {
 //            return "success";
 //        }
         if (save) {
-            return "success";
+            return "success!";
         }
-        return "fail";
+        return "fail!";
     }
 }
