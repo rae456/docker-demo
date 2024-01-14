@@ -64,11 +64,11 @@ public class EmployeesController {
     @PostMapping("save")
     public String saveEmployee(@RequestBody @Validated(CustomerValidGroup.Crud.Insert.class) Employees employees) {
         for (int i = 0; i < 100; i++) {
-            log.error("error信息!");
-            log.warn("warn信息!");
-            log.info("info信息!");
-            log.debug("debug信息!");
-            log.trace("trace信息!");
+            log.error("error信息!!");
+            log.warn("warn信息!!");
+            log.info("info信息!!");
+            log.debug("debug信息!!");
+            log.trace("trace信息!!");
         }
         System.out.println(log.getClass().getName());
         System.out.println(log.getName());
