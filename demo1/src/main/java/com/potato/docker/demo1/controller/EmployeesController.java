@@ -71,7 +71,6 @@ public class EmployeesController {
             log.debug("debug信息!!");
             log.trace("trace信息!!");
         }
-        boolean save = employeesService.save(employee);
         System.out.println(log.getClass().getName());
         System.out.println(log.getName());
 //        logger.info("入参{}",  employees);
