@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: docker-demo1
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      server-addr: 192.168.136.129:8848
+      username: nacos
+      password: nacos
+      config:
+        namespace: c41c90a9-a605-4752-913a-10512d24f0c9
+        group: DOCKER_GROUP
+        file-extension: yaml
+        shared-configs:
+          - data-id: common-mysql-datasource.yaml
+            group: DOCKER_GROUP
+            refresh: true
+          - data-id: common-redis.yaml
+            group: DOCKER_GROUP
+            refresh: true
+          - data-id: common-mybatisplus.yaml
+            group: DOCKER_GROUP
+            refresh: true
+      discovery:
+        namespace: c41c90a9-a605-4752-913a-10512d24f0c9

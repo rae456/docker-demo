@@ -1,0 +1,18 @@
+spring:
+  redis:
+    host: 192.168.136.129
+    password: Qw123456.
+#logging:
+#  level:
+#    com.potato.docker.demo1: trace
+#  pattern:
+#    console: "%clr([%-5p] %c %t %d{yyyy-MM-dd HH:mm:ss SSS} %m%n)"
+#    file: "[%-5p] %c %t %d{yyyy-MM-dd HH:mm:ss SSS} %m%n"
+#  charset:
+#    file: UTF-8
+#    console: UTF-8
+#  logback:
+#    rollingpolicy:
+#      max-file-size: 10KB
+#      file-name-pattern: "E:/Documents/logs/%d{yyyy-MM-dd-HH-mm}_log_%i.log"
+#      max-history: 10

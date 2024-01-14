@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration monitorInterval="60">
+    <properties>
+        <property name="LOG_PATH" value="E:/Documents/logs/${spring:spring.application.name}"/>
+        <property value="org.apache.logging.log4j.core.appender.AsyncAppender"></property>
+        <property name="LOG_DATE_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS}"/>
+        <property name="STDOUT_PATTERN"
+                  value="${LOG_DATE_PATTERN} %highlight{%-5p}{ERROR=Bright Red, WARN=Bright Yellow, INFO=Bright Green, DEBUG=Bright Cyan, TRACE=Bright White} %style{%-4r}{yellow} ---%style{[%t]}{bright, magenta} %style{%.40c{1.}.%M(%L)}{cyan}: %m%n"/>
+        <property name="FILE_PATTERN" value="${LOG_DATE_PATTERN} [%t] %-5level %.40c{1.}.%M(%L) %m%n"/>
+    </properties>
+    <appenders>
+        <console name="STDOUT" target="SYSTEM_OUT">
+            <patternLayout>
+                <pattern>${STDOUT_PATTERN}</pattern>
+            </patternLayout>
+        </console>
+
+        <randomAccessFile  name="ALL_FILE" fileName="${LOG_PATH}/${spring:spring.application.name}-ALL.log" append="false">
+            <patternLayout pattern="${FILE_PATTERN}"/>
+        </randomAccessFile >
+
+        <rollingFile name="INFO_ROLLING_FILE" fileName="${LOG_PATH}/${spring:spring.application.name}-INFO.log"
+                     filePattern="${LOG_PATH}/info/$${date:yyyy-MM-dd}/info-%d{yyyy-MM-dd}_%i.log">
+            <levelRangeFilter minLevel="INFO" maxLevel="INFO"/>
+            <patternLayout pattern="${FILE_PATTERN}"/>
+            <policies>
+                <onStartupTriggeringPolicy/>
+                <timeBasedTriggeringPolicy/>
+                <sizeBasedTriggeringPolicy size="10KB"/>
+            </policies>
+            <defaultRolloverStrategy max="30"/>
+        </rollingFile>
+
+        <rollingFile name="WARN_ROLLING_FILE" fileName="${LOG_PATH}/${spring:spring.application.name}-WARN.log"
+                     filePattern="${LOG_PATH}/warn/$${date:yyyy-MM-dd}/warn-%d{yyyy-MM-dd}_%i.log">
+            <levelRangeFilter minLevel="WARN" maxLevel="WARN"/>
+            <patternLayout pattern="${FILE_PATTERN}"/>
+            <policies>
+                <onStartupTriggeringPolicy/>
+                <timeBasedTriggeringPolicy/>
+                <sizeBasedTriggeringPolicy size="10KB"/>
+            </policies>
+            <defaultRolloverStrategy max="30"/>
+        </rollingFile>
+
+        <rollingFile name="ERROR_ROLLING_FILE" fileName="${LOG_PATH}/${spring:spring.application.name}-ERROR.log"
+                     filePattern="${LOG_PATH}/error/$${date:yyyy-MM-dd}/error-%d{yyyy-MM-dd}_%i.log">
+            <levelRangeFilter minLevel="ERROR"/>
+            <patternLayout pattern="${FILE_PATTERN}"/>
+            <policies>
+                <onStartupTriggeringPolicy/>
+                <timeBasedTriggeringPolicy/>
+                <sizeBasedTriggeringPolicy size="10KB"/>
+            </policies>
+            <defaultRolloverStrategy max="30"/>
+        </rollingFile>
+        <!-- Don't forget to set system property
+        -Dlog4j2.contextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector
+        or
+        -Dlog4j2.contextSelector=org.apache.logging.log4j.core.async.BasicAsyncLoggerContextSelector
+             to make all loggers asynchronous. -->
+<!--        <async name="ASYNC_STDOUT">-->
+<!--            <appenderRef ref="STDOUT"/>-->
+<!--        </async>-->
+    </appenders>
+<!--includeLocation="false"表示去除日志记录中的行号信息，这个行号信息非常的影响日志记录的效率(生产中都不加这个行号)亚重的时候可能记录的比同步的日志效率还有低
+additivity="false"
+表示不继承rootlogger-->
+    <loggers>
+        <asyncLogger name="com.potato.docker.demo1" level="info" includeLocation="false" additivity="false">
+            <appenderRef ref="STDOUT"/>
+        </asyncLogger>
+        <root level="info">
+            <appenderRef ref="STDOUT"/>
+        </root>
+    </loggers>
+</configuration>
