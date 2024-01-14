@@ -58,6 +58,7 @@ public class EmployeesController {
     @ApiOperation("获取所有符合条件的员工信息")
     @PostMapping("list")
     public Page<Employees> listByConditions(@RequestBody EmployeeQueryParam employeeQueryParam) {
+        System.out.println("A");
         return employeesService.listByConditions(employeeQueryParam);
     }
 
